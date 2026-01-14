@@ -9,9 +9,6 @@ Reaction is a game of testing your reaction time. Users log in and can start a g
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
-> Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
-
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] Proper use of Markdown
@@ -22,26 +19,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Reaction is a simple game. Be faster than everyone else. Once you start the game, you are presented with a button on your screen with a color of your choice. Pay close attention, because as soon as the color changes, you need to press it as fast as you can. Log in and compete with friends for the number one spot as the fastest there is.
+Reaction is a simple game. Be faster than everyone else. Once you start the game, you are presented with a button on your screen with a color of your choice. Pay close attention, because as soon as the color changes, you need to press it as fast as you can. Log in and compete with other players for the number one spot as the fastest there is.
 
 ### Design
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
-```
-
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Real time leaderboard of all users on separate page
+- Best time is saved
+- User can change button colors
+- Color combo suggestor
 
 ### Technologies
 
