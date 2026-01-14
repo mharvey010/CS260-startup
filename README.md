@@ -13,9 +13,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] Description of key features
+- [x] Description of how you will use each technology
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -36,12 +36,16 @@ Reaction is a simple game. Be faster than everyone else. Once you start the game
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - 4 HTML pages. Login page, game page, leaderboard page, and preferences/settings page.
+- **CSS** - Simple and clean looking design. There will be an active timer for the game. Coloring and shaping of interactive objects.
+- **React** - Controls for the game, navigating some UI elements, logging in page, and updating scores/times.
+- **Service** - Backend server functionality for:
+    - Storing scores
+    - Pulling user settings
+    - Retrieving high scores
+    - Using the Lanyard API to grab a user's Discord presence
+- **DB/Login** - Storing user and their login info. Stores scores in database. A user must be logged in to see leaderboard.
+- **WebSocket** - All users can see a public real time leaderboard displaying the best times. Updates as users improve their times.
 
 ## 🚀 AWS deliverable
 
