@@ -1,4 +1,4 @@
-# Your startup name here
+# Reaction
 
 [My Notes](notes.md)
 
