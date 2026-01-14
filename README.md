@@ -20,7 +20,7 @@ Reaction is a simple game. Be faster than everyone else. Once you start the game
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](reaction_rough_design.jpeg)
 
 ### Key features
 
