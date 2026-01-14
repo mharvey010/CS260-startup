@@ -4,9 +4,6 @@
 
 Reaction is a game of testing your reaction time. Users log in and can start a game. A button is presented to the user and once the color of the button changes, they press the button. The application logs the time it took to press the button. The times are compared to other user's times which are displayed on a leaderboard. The user will also have the option to change the colors of the button.
 
-> [!NOTE]
-> If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
-
 ## 🚀 Specification Deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
