@@ -55,12 +55,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
+- [x] **Proper HTML element usage** - Not sure how to describe what I did here, but I made sure I used all html tags properly
+- [x] **Links** - Added menu links for all pages to interlink with one another.
+- [x] **Text** - Every page has some sort of text to inform the user and help them to interact with the content.
+- [x] **3rd party API placeholder** - Placed at the bottom of each page. Discord presence is displayed for user.
 - [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
+- [x] **Login placeholder** - Home page has a simple login.
 - [ ] **DB data placeholder** - I did not complete this part of the deliverable.
 - [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
 
