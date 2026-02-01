@@ -40,7 +40,7 @@ I am going to use the required technologies in the following ways.
     - Storing scores
     - Pulling user settings
     - Retrieving high scores
-    - Using the Lanyard API to grab a user's Discord presence
+    - Using the Lanyard API to grab a user's Discord presence. (API link: https://github.com/Phineas/lanyard)
 - **DB/Login** - Storing user and their login info. Stores scores in database. A user must be logged in to see leaderboard.
 - **WebSocket** - All users can see a public real time leaderboard displaying the best times. Updates as users improve their times.
 
