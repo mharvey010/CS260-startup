@@ -14,7 +14,7 @@ export default function App() {
             <h1>Reactions</h1>
             <nav>
               <menu className="nav nav-underline">
-                <li className="nav-item"><NavLink className="nav-link active" to="index">Home</NavLink></li>
+                <li className="nav-item"><NavLink className="nav-link" to="">Home</NavLink></li>
                 <li className="nav-item"><NavLink className="nav-link" to="play">Play Reactions</NavLink></li>
                 <li className="nav-item"><NavLink className="nav-link" to="scores">Scoreboard</NavLink></li>
               </menu>
@@ -23,7 +23,7 @@ export default function App() {
           </header>
 
           <Routes>
-            <Route path='/' element={<Login />} exact />
+            <Route path='/' element={<Login />} />
             <Route path='/play' element={<Play />} />
             <Route path='/scores' element={<Scores />} />
             <Route path='*' element={<NotFound />} />
