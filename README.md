@@ -79,9 +79,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - Vite was installed correctly and everything deployed with it.
+- [x] **Components** - Multiple items edited in all jsx files in order to be compatible with jsx react.
+- [x] **Router** - React-router-dom works great. All navigable buttons link properly together using BrowserRouter.
 
 ## 🚀 React part 2: Reactivity deliverable
 
