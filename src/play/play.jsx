@@ -15,7 +15,7 @@ export function Play() {
         </div>
         <div id="reaction-button" style={{ textAlign: 'center' }}>
             <button>
-                <img src="../reaction_button.png" style={{ width: '300px', height: '300px' }}/>
+                <img src="../public/reaction_button.png" style={{ width: '300px', height: '300px' }}/>
             </button>
         </div>
         <div id="game-start" style={{ textAlign: 'center', marginTop: '20px' }}>
