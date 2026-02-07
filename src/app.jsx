@@ -9,7 +9,7 @@ import { Scores } from './scores/scores';
 export default function App() {
   return (
     <BrowserRouter>
-        <div className="app bg-dark text-light">
+        <div className="app">
           <header>
             <h1>Reactions</h1>
             <nav>
