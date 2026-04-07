@@ -3,7 +3,7 @@ import './play.css';
 import { ReactionGame } from './reactionGame';
 
 export function Play({ userName }) {
-  const [personalBest, setPersonalBest] = React.useState('00.00');
+  const [personalBest, setPersonalBest] = React.useState('00.000');
 
   async function updatePersonalBest() {
       const response = await fetch('/api/personal-best');
