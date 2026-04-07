@@ -1,0 +1,40 @@
+.reaction-game-timer {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 50px;
+}
+
+.reaction-button-wrapper,
+.reaction-start-wrapper {
+  text-align: center;
+}
+
+.reaction-button {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 6px solid #191818;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.reaction-button.waiting {
+  background-color: rgb(222, 0, 0);
+}
+
+.reaction-button.go {
+  background-color: #28a745;
+}
+
+.reaction-button:disabled {
+  opacity: .95;
+  cursor: not-allowed;
+}
+
+.start-game-button {
+  font-size: 30px;
+  padding: 0.75rem 1.5rem;
+}
