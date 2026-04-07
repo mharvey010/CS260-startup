@@ -110,7 +110,6 @@ export function Scores() {
         <tbody>
           {liveUpdates.map((update) => {
             let message = '';
-            // Handle both simulated events and backend recent-scores format
             if (update.type === UpdateEvent.PersonalBest) {
               message = `${update.value.player} achieved a new personal best!`;
             } else if (update.type === UpdateEvent.GameFinished || update.type === 'gameFinished') {
