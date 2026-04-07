@@ -101,3 +101,7 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
+## Service
+
+Third-party API call: https://api.lanyard.rest/v1/users/419560236140068865
