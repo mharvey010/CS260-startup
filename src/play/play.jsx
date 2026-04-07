@@ -6,15 +6,17 @@ export function Play({ userName }) {
   const [personalBest, setPersonalBest] = React.useState('00.00');
 
   async function updatePersonalBest() {
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-      const scores = JSON.parse(scoresText);
-      const userScores = scores.filter(score => score.name === userName);
-      if (userScores.length > 0) {
-        const bestScore = Math.min(...userScores.map(s => s.score));
-        setPersonalBest(bestScore);
+      const response = await fetch('/api/personal-best');
+      if (!response.ok) {
+        return;
       }
-    }
+
+      const result = await response.json();
+      if (result?.personalBest != null) {
+        setPersonalBest(parseFloat(result.personalBest));
+      } else {
+        setPersonalBest('00.000');
+      }
   };
 
   React.useEffect(() => {
