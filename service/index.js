@@ -83,13 +83,29 @@ apiRouter.get('/personal-best', verifyAuth, async (req, res) => {
     return res.status(401).send({ msg: 'Unauthorized' });
   }
 
-  const userScores = scores.filter(score => score.name === user.email);
-  if (userScores.length > 0) {
-    const bestScore = Math.min(...userScores.map(s => parseFloat(s.score)));
-    res.send({ personalBest: bestScore });
+  const personalBest = await DB.getPersonalBest(user.email);
+  if (personalBest) {
+    res.send({ personalBest: parseFloat(personalBest.score) });
   } else {
     res.send({ personalBest: null });
   }
+});
+
+// UpdatePersonalBest
+apiRouter.post('/personal-best', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
+  }
+
+  const { score } = req.body;
+  if (score == null) {
+    return res.status(400).send({ msg: 'Score is required' });
+  }
+
+  await DB.addOrUpdatePersonalBest(user.email, parseFloat(score));
+  const personalBest = await DB.getPersonalBest(user.email);
+  res.send({ personalBest: parseFloat(personalBest.score) });
 });
 
 // GetRecentScores (last 5 scores submitted)
