@@ -92,17 +92,6 @@ apiRouter.get('/personal-best', verifyAuth, async (req, res) => {
   }
 });
 
-// GetLeaderboard (top 10 scores)
-apiRouter.get('/leaderboard', verifyAuth, (_req, res) => {
-  const leaderboard = scores.slice(0, 10).map((score, index) => ({
-    rank: index + 1,
-    name: score.name.split('@')[0],
-    score: parseFloat(score.score),
-    date: score.date
-  }));
-  res.send(leaderboard);
-});
-
 // GetRecentScores (last 5 scores submitted)
 apiRouter.get('/recent-scores', verifyAuth, (_req, res) => {
   const recentScores = scores.slice(-5).reverse().map(score => ({

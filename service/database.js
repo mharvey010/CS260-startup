@@ -6,6 +6,7 @@ const client = new MongoClient(url);
 const db = client.db('reactions');
 const userCollection = db.collection('user');
 const scoreCollection = db.collection('score');
+const pbCollection = db.collection('personalBest');
 
 function getUser(email) {
   return userCollection.findOne({ email: email });
@@ -40,3 +41,13 @@ function getHighScores() {
   const cursor = scoreCollection.find(query, options);
   return cursor.toArray();
 }
+
+module.exports = {
+  getUser,
+  getUserByToken,
+  addUser,
+  updateUser,
+  updateUserRemoveAuth,
+  addScore,
+  getHighScores,
+};
