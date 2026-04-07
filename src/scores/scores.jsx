@@ -12,7 +12,35 @@ export function Scores() {
       .then((scores) => scores.sort((a, b) => a.score - b.score))
       .then((scores) => {
         setScores(scores);
-      });
+      })
+      .catch((error) => console.error('Failed to load scores:', error));
+  }, []);
+
+  React.useEffect(() => {
+    async function loadRecentScores() {
+      try {
+        const response = await fetch('/api/recent-scores');
+        if (!response.ok) {
+          throw new Error('Failed to load recent scores');
+        }
+
+        const recentScores = await response.json();
+        const initialEvents = recentScores.map((score, index) => ({
+          timestamp: Date.now() - (index * 1000),
+          type: 'gameFinished',
+          value: {
+            player: score.name,
+            score: score.score,
+            date: score.date,
+          },
+        }));
+        setLiveUpdates(initialEvents);
+      } catch (error) {
+        console.error('Unable to load recent scores:', error);
+      }
+    }
+
+    loadRecentScores();
   }, []);
 
   React.useEffect(() => {
@@ -82,9 +110,10 @@ export function Scores() {
         <tbody>
           {liveUpdates.map((update) => {
             let message = '';
+            // Handle both simulated events and backend recent-scores format
             if (update.type === UpdateEvent.PersonalBest) {
               message = `${update.value.player} achieved a new personal best!`;
-            } else if (update.type === UpdateEvent.GameFinished) {
+            } else if (update.type === UpdateEvent.GameFinished || update.type === 'gameFinished') {
               message = `${update.value.player} finished a game!`;
             }
             return (
