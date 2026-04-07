@@ -1,7 +1,7 @@
 import React from 'react';
 import './reactionGame.css';
 
-export function ReactionGame() {
+export function ReactionGame({ userName }) {
   const [buttonState, setButtonState] = React.useState('ready');
   const [displayTime, setDisplayTime] = React.useState('0.000 seconds');
   const timerRef = React.useRef(null);
@@ -19,7 +19,7 @@ export function ReactionGame() {
     };
   }, []);
 
-  const startGame = () => {
+  async function startGame() {
     setButtonState('set');
     setDisplayTime('0.000 seconds');
 
@@ -42,7 +42,18 @@ export function ReactionGame() {
     }, delay);
   };
 
-  const handleReactionClick = () => {
+  async function saveScore(score) {
+    const storedScores = JSON.parse(localStorage.getItem('scores') || '[]');
+    const newScore = {
+      name: userName,
+      score: parseFloat(score.toFixed(3)),
+      date: new Date().toLocaleDateString(),
+    };
+    storedScores.push(newScore);
+    localStorage.setItem('scores', JSON.stringify(storedScores));
+  };
+
+  async function handleReactionClick() {
     if (buttonState !== 'go') {
       return;
     }
@@ -53,7 +64,9 @@ export function ReactionGame() {
     const finalTime = (Date.now() - startTimeRef.current) / 1000;
     setDisplayTime(`${finalTime.toFixed(3)} seconds`);
     setButtonState('finished');
+    await saveScore(finalTime);
   };
+
 
   const buttonLabel = buttonState === 'set' ? 'SET...' : buttonState === 'go' ? 'GO' : 'READY?';
   const buttonClass = buttonState === 'go' ? 'go' : 'waiting';

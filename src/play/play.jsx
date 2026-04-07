@@ -11,7 +11,7 @@ export function Play({ userName }) {
         <div className="player-info" style={{ textAlign: 'right' }}>
             Personal Best Time: <span>00.00 seconds</span>
         </div>
-        <ReactionGame />
+        <ReactionGame userName={userName} />
     </main>
   );
 }
