@@ -11,6 +11,33 @@ export default function App() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
+  const [presenceText, setPresenceText] = React.useState('Loading...');
+  const [presenceError, setPresenceError] = React.useState(null);
+
+  React.useEffect(() => {
+    const presenceApiUrl = 'https://api.lanyard.rest/v1/users/419560236140068865';
+
+    async function loadPresence() {
+      try {
+        const response = await fetch(presenceApiUrl);
+        if (!response.ok) {
+          throw new Error(`Presence API returned ${response.status}`);
+        }
+
+        const data = await response.json();
+        const selectedValue = data?.discord_status ?? data?.data?.discord_status ?? 'Unknown';
+
+        setPresenceText(selectedValue);
+        setPresenceError(null);
+      } catch (error) {
+        console.error('Unable to load presence data:', error);
+        setPresenceText('Unavailable');
+        setPresenceError(error.message);
+      }
+    }
+
+    loadPresence();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -54,7 +81,7 @@ export default function App() {
             <div className="container-fluid">
               <span>Author: Michael Harvey</span>
               <a href="https://github.com/mharvey010/CS260-startup">GitHub</a>
-              <p>Discord Presence: (Third-party API integration placeholder)</p>
+              <p>Michael Harvey's Discord Presence: {presenceText}</p>
             </div>
           </footer>
         </div>
