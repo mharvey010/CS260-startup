@@ -63,8 +63,55 @@ const verifyAuth = async (req, res, next) => {
     next();
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
+  }};
+
+// GetScores
+apiRouter.get('/scores', verifyAuth, (_req, res) => {
+  res.send(scores);
+});
+
+// SubmitScore
+apiRouter.post('/score', verifyAuth, (req, res) => {
+  scores = updateScores(req.body);
+  res.send(scores);
+});
+
+// GetPersonalBest
+apiRouter.get('/personal-best', verifyAuth, async (req, res) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
   }
-};
+
+  const userScores = scores.filter(score => score.name === user.email);
+  if (userScores.length > 0) {
+    const bestScore = Math.min(...userScores.map(s => parseFloat(s.score)));
+    res.send({ personalBest: bestScore });
+  } else {
+    res.send({ personalBest: null });
+  }
+});
+
+// GetLeaderboard (top 10 scores)
+apiRouter.get('/leaderboard', verifyAuth, (_req, res) => {
+  const leaderboard = scores.slice(0, 10).map((score, index) => ({
+    rank: index + 1,
+    name: score.name.split('@')[0],
+    score: parseFloat(score.score),
+    date: score.date
+  }));
+  res.send(leaderboard);
+});
+
+// GetRecentScores (last 5 scores submitted)
+apiRouter.get('/recent-scores', verifyAuth, (_req, res) => {
+  const recentScores = scores.slice(-5).reverse().map(score => ({
+    name: score.name.split('@')[0],
+    score: parseFloat(score.score),
+    date: score.date
+  }));
+  res.send(recentScores);
+});
 
 // Default error handler
 app.use(function (err, req, res, next) {
@@ -75,6 +122,22 @@ app.use(function (err, req, res, next) {
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
+
+function updateScores(newScore) {
+  const normalizedScore = {
+    ...newScore,
+    score: parseFloat(newScore.score),
+  };
+
+  scores.push(normalizedScore);
+  scores.sort((a, b) => a.score - b.score);
+
+  if (scores.length > 10) {
+    scores.length = 10;
+  }
+
+  return scores;
+}
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
