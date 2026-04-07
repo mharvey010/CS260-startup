@@ -43,14 +43,18 @@ export function ReactionGame({ userName }) {
   };
 
   async function saveScore(score) {
-    const storedScores = JSON.parse(localStorage.getItem('scores') || '[]');
     const newScore = {
       name: userName,
       score: parseFloat(score.toFixed(3)),
       date: new Date().toLocaleDateString(),
     };
-    storedScores.push(newScore);
-    localStorage.setItem('scores', JSON.stringify(storedScores));
+    
+    await fetch('/api/score', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newScore),
+    });
+
   };
 
   async function handleReactionClick() {
