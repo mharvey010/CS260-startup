@@ -1,8 +1,10 @@
 import React from 'react';
 import './scores.css';
+import { UpdateEvent, liveUpdateNotifier } from './liveUpdateNotifier';
 
 export function Scores() {
   const [scores, setScores] = React.useState([]);
+  const [liveUpdates, setLiveUpdates] = React.useState([]);
 
   React.useEffect(() => {
     const scoresText = localStorage.getItem('scores');
@@ -11,6 +13,24 @@ export function Scores() {
       parsedScores.sort((a, b) => a.score - b.score);
       setScores(parsedScores);
     }
+  }, []);
+
+  React.useEffect(() => {
+    function handleLiveUpdate(event) {
+      setLiveUpdates((prevUpdates) => {
+        let newUpdates = [event, ...prevUpdates];
+        if (newUpdates.length > 5) {
+          newUpdates = newUpdates.slice(0, 5);
+        }
+        return newUpdates;
+      });
+    }
+
+    liveUpdateNotifier.addHandler(handleLiveUpdate);
+
+    return () => {
+      liveUpdateNotifier.removeHandler(handleLiveUpdate);
+    };
   }, []);
 
   const leaderboardRows = [];
@@ -52,26 +72,30 @@ export function Scores() {
       <br/>
       <h2>Live High Score Updates (Websocket placeholder)</h2>
       <table className="table">
-        <tr>
-          <th>Player</th>
-          <th>Update Message</th>
-          <th>Score</th>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>Peter got a new personal best!</td>
-          <td>0.321 seconds</td>
-        </tr>
-        <tr>
-          <td>James</td>
-          <td>James rose from 5th place to 4th place!</td>
-          <td>0.215 seconds</td>
-        </tr>
-        <tr>
-          <td>John</td>
-          <td>John beat his previous score!</td>
-          <td>0.503 seconds</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Update Message</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {liveUpdates.map((update) => {
+            let message = '';
+            if (update.type === UpdateEvent.PersonalBest) {
+              message = `${update.value.player} achieved a new personal best!`;
+            } else if (update.type === UpdateEvent.GameFinished) {
+              message = `${update.value.player} finished a game!`;
+            }
+            return (
+              <tr key={update.timestamp}>
+                <td>{update.value.player}</td>
+                <td>{message}</td>
+                <td>{update.value.score} seconds</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </main>
   );
