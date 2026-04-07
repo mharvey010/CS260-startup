@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
-var apiRouter = express.Router();
+const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // CreateAuth a new user
@@ -66,12 +66,13 @@ const verifyAuth = async (req, res, next) => {
 
 // GetScores
 apiRouter.get('/scores', verifyAuth, async (_req, res) => {
+  const scores = await DB.getHighScores();
   res.send(scores);
 });
 
 // SubmitScore
 apiRouter.post('/score', verifyAuth, async (req, res) => {
-  scores = updateScores(req.body);
+  const scores = await updateScores(req.body);
   res.send(scores);
 });
 
@@ -122,20 +123,14 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-function updateScores(newScore) {
+async function updateScores(newScore) {
   const normalizedScore = {
     ...newScore,
     score: parseFloat(newScore.score),
   };
 
-  scores.push(normalizedScore);
-  scores.sort((a, b) => a.score - b.score);
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
+  await DB.addScore(normalizedScore);
+  return DB.getHighScores();
 }
 
 async function createUser(email, password) {
