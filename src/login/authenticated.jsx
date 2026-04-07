@@ -15,7 +15,7 @@ export function Authenticated(props) {
 
   return (
     <div>
-      <div className='playerName'>{props.userName}</div>
+      <div className='playerName'>{props.userName.split('@')[0]}</div>
       <Button variant='primary' onClick={() => navigate('/play')}>
         Play
       </Button>

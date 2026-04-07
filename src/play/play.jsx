@@ -61,7 +61,7 @@ export function Play({ userName }) {
   return (
     <main>
         <div style={{ textAlign: 'right' }}>
-            Logged in as: <span>{userName}</span>
+            Logged in as: <span>{userName.split('@')[0]}</span>
         </div>
         <div style={{ textAlign: 'right' }}>
             Personal Best Time: <span>00.00 seconds</span>
