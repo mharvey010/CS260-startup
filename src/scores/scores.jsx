@@ -7,12 +7,12 @@ export function Scores() {
   const [liveUpdates, setLiveUpdates] = React.useState([]);
 
   React.useEffect(() => {
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-      const parsedScores = JSON.parse(scoresText);
-      parsedScores.sort((a, b) => a.score - b.score);
-      setScores(parsedScores);
-    }
+    fetch('/api/scores')
+      .then((response) => response.json())
+      .then((scores) => scores.sort((a, b) => a.score - b.score))
+      .then((scores) => {
+        setScores(scores);
+      });
   }, []);
 
   React.useEffect(() => {
