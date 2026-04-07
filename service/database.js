@@ -42,6 +42,22 @@ function getHighScores() {
   return cursor.toArray();
 }
 
+function getPersonalBest(userName) {
+  return pbCollection.findOne({ name: userName });
+}
+
+async function addOrUpdatePersonalBest(userName, score) {
+  const existingPB = await getPersonalBest(userName);
+  if (!existingPB) {
+    await pbCollection.insertOne({ name: userName, score: score });
+  } else if (score < existingPB.score) {
+    await pbCollection.updateOne(
+      { name: userName },
+      { $set: { score: score } }
+    );
+  }
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -50,4 +66,6 @@ module.exports = {
   updateUserRemoveAuth,
   addScore,
   getHighScores,
+  getPersonalBest,
+  addOrUpdatePersonalBest
 };
