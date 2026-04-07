@@ -5,8 +5,13 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Play } from './play/play';
 import { Scores } from './scores/scores';
+import { AuthState } from './login/authState';
 
 export default function App() {
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+  const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
     <BrowserRouter>
         <div className="app">
@@ -15,8 +20,12 @@ export default function App() {
             <nav>
               <menu className="nav nav-underline">
                 <li className="nav-item"><NavLink className="nav-link" to="">Home</NavLink></li>
-                <li className="nav-item"><NavLink className="nav-link" to="play">Play Reactions</NavLink></li>
-                <li className="nav-item"><NavLink className="nav-link" to="scores">Scoreboard</NavLink></li>
+                {authState === AuthState.Authenticated && (
+                  <li className="nav-item"><NavLink className="nav-link" to="play">Play Reactions</NavLink></li>
+                )}
+                {authState === AuthState.Authenticated && (
+                  <li className="nav-item"><NavLink className="nav-link" to="scores">Scoreboard</NavLink></li>
+                )}
               </menu>
             </nav>
             <hr />
