@@ -1,4 +1,4 @@
 .vscode/
 .DS_Store
 node_modules/
-service/dbConfig.json/
+CS260-startup/service/dbConfig.json
