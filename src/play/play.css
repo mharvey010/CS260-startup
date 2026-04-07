@@ -1,1 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+.reaction-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.reaction-button {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 6px solid #333;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.reaction-button.waiting {
+  background-color: #dc3545;
+}
+
+.reaction-button.go {
+  background-color: #28a745;
+}
+
+.start-game-button {
+  font-size: 30px;
+  padding: 0.75rem 1.5rem;
+}

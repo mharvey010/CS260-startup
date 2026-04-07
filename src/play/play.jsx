@@ -2,6 +2,8 @@ import React from 'react';
 import './play.css';
 
 export function Play({ userName }) {
+  const [isGreen, setIsGreen] = React.useState(false);
+
   return (
     <main>
         <div style={{ textAlign: 'right' }}>
@@ -14,8 +16,11 @@ export function Play({ userName }) {
             0.000 seconds
         </div>
         <div id="reaction-button" style={{ textAlign: 'center' }}>
-            <button>
-                <img src="/reaction_button.png" style={{ width: '300px', height: '300px' }}/>
+            <button
+              className={`reaction-button ${isGreen ? 'go' : 'waiting'}`}
+              onClick={() => setIsGreen(!isGreen)}
+            >
+              {isGreen ? 'GO' : 'READY?'}
             </button>
         </div>
         <div id="game-start" style={{ textAlign: 'center', marginTop: '20px' }}>
