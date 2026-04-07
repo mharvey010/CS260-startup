@@ -5,19 +5,26 @@ import { ReactionGame } from './reactionGame';
 export function Play({ userName }) {
   const [personalBest, setPersonalBest] = React.useState('00.000');
 
-  async function updatePersonalBest() {
-      const response = await fetch('/api/personal-best');
-      if (!response.ok) {
-        return;
-      }
+  async function updatePersonalBest(newScore) {
+    if (newScore != null) {
+        const saveResponse = await fetch('/api/personal-best', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ score: newScore }),
+        });
+        if (!saveResponse.ok) return;
+    }
 
-      const result = await response.json();
-      if (result?.personalBest != null) {
+    const response = await fetch('/api/personal-best');
+    if (!response.ok) return;
+
+    const result = await response.json();
+    if (result?.personalBest != null) {
         setPersonalBest(parseFloat(result.personalBest));
-      } else {
+    } else {
         setPersonalBest('00.000');
-      }
-  };
+    }
+}
 
   React.useEffect(() => {
     updatePersonalBest();
