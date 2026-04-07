@@ -32,7 +32,19 @@ export default function App() {
           </header>
 
           <Routes>
-            <Route path='/' element={<Login />} />
+            <Route
+              path='/'
+              element={
+                <Login
+                  userName={userName}
+                  authState={authState}
+                  onAuthChange={(userName, authState) => {
+                    setAuthState(authState);
+                    setUserName(userName);
+                  }}
+                />
+              }
+            />
             <Route path='/play' element={<Play />} />
             <Route path='/scores' element={<Scores />} />
             <Route path='*' element={<NotFound />} />
