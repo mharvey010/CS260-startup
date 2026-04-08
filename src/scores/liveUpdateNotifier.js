@@ -6,7 +6,6 @@ const UpdateEvent = {
 class LiveUpdateNotifier {
   events = [];
   handlers = [];
-  playerNames = ['Sarah', 'Michael', 'Emma', 'David', 'Lisa', 'James', 'Alex', 'Jordan'];
 
   constructor() {
   let port = window.location.port;
@@ -27,7 +26,7 @@ class LiveUpdateNotifier {
       value: value,
       timestamp: Date.now(),
     };
-    this.receiveEvent(event);
+    this.socket.send(JSON.stringify(event));
   }
 
   addHandler(handler) {
