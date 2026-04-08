@@ -1,5 +1,6 @@
 import React from 'react';
 import './reactionGame.css';
+import { UpdateEvent, liveUpdateNotifier } from '../scores/liveUpdateNotifier.js';
 
 export function ReactionGame({ userName, onScoreSaved}) {
   const [buttonState, setButtonState] = React.useState('ready');
@@ -58,6 +59,12 @@ export function ReactionGame({ userName, onScoreSaved}) {
     if (onScoreSaved) {
     await onScoreSaved(parseFloat(score.toFixed(3)));
     }
+
+    liveUpdateNotifier.broadcastEvent(userName, UpdateEvent.GameFinished, {
+      player: userName.split('@')[0],
+      score: parseFloat(score.toFixed(3)),
+      date: new Date().toLocaleDateString(),
+    });
   };
 
   async function handleReactionClick() {
