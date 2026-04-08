@@ -1,7 +1,7 @@
 import React from 'react';
 import './reactionGame.css';
 
-export function ReactionGame({ userName }) {
+export function ReactionGame({ userName, onScoreSaved}) {
   const [buttonState, setButtonState] = React.useState('ready');
   const [displayTime, setDisplayTime] = React.useState('0.000 seconds');
   const timerRef = React.useRef(null);
@@ -55,6 +55,9 @@ export function ReactionGame({ userName }) {
       body: JSON.stringify(newScore),
     });
 
+    if (onScoreSaved) {
+    await onScoreSaved(parseFloat(score.toFixed(3)));
+    }
   };
 
   async function handleReactionClick() {
