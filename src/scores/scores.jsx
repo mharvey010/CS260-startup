@@ -98,7 +98,7 @@ export function Scores() {
         </tbody>
       </table>
       <br/>
-      <h2>Live High Score Updates (Websocket placeholder)</h2>
+      <h2>Live Update Board</h2>
       <table className="table">
         <thead>
           <tr>
