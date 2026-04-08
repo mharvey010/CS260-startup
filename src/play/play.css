@@ -2,17 +2,50 @@
 
 .play-page {
   padding: 0 1rem;
+  width: 100%;
 }
 
-.play-header {
+.play-content {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+  align-items: center;
+}
+
+.play-instructions {
+  flex: 1;
+  padding: 1.5rem;
+  border-right: 2px solid rgb(222, 0, 0);
+}
+
+.play-instructions h2 {
   font-size: 1.75rem;
+  margin-bottom: 0.75rem;
 }
 
-.player-info {
-  margin-top: 75px;
+.play-instructions ol {
+  padding-left: 1.25rem;
+  line-height: 2;
+}
+
+.play-user {
   font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.play-personal-best {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
 }
 
 #userName {
   color: rgb(222, 0, 0);
+}
+
+.play-game {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
