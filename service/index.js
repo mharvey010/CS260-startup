@@ -109,16 +109,6 @@ apiRouter.post('/personal-best', verifyAuth, async (req, res) => {
   res.send({ personalBest: parseFloat(personalBest.score) });
 });
 
-// GetRecentScores (last 5 scores submitted)
-apiRouter.get('/recent-scores', verifyAuth, (_req, res) => {
-  const recentScores = scores.slice(-5).reverse().map(score => ({
-    name: score.name.split('@')[0],
-    score: parseFloat(score.score),
-    date: score.date
-  }));
-  res.send(recentScores);
-});
-
 // Default error handler
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
