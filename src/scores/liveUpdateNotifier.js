@@ -9,18 +9,16 @@ class LiveUpdateNotifier {
   playerNames = ['Sarah', 'Michael', 'Emma', 'David', 'Lisa', 'James', 'Alex', 'Jordan'];
 
   constructor() {
-    setInterval(() => {
-      const randomPlayer = this.playerNames[Math.floor(Math.random() * this.playerNames.length)];
-      const randomScore = (Math.random() * 2).toFixed(3);
-      const eventType = Math.random() > 0.5 ? UpdateEvent.PersonalBest : UpdateEvent.GameFinished;
-      
-      this.broadcastEvent(randomPlayer, eventType, {
-        player: randomPlayer,
-        score: randomScore,
-        date: new Date().toLocaleDateString(),
-      });
-    }, 5000);
-  }
+  let port = window.location.port;
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+  this.socket.onmessage = async (msg) => {
+    try {
+      const event = JSON.parse(await msg.data.text());
+      this.receiveEvent(event);
+    } catch {}
+  };
+}
 
   broadcastEvent(player, type, value) {
     const event = {
