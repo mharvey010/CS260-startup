@@ -36,7 +36,7 @@ function getHighScores() {
   const query = { score: { $gt: 0, $lt: 20 } };
   const options = {
     sort: { score: 1 },
-    limit: 10,
+    limit: 8,
   };
   const cursor = scoreCollection.find(query, options);
   return cursor.toArray();
