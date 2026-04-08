@@ -4,6 +4,15 @@
   padding: 0 1rem;
 }
 
+.play-header {
+  font-size: 1.75rem;
+}
+
 .player-info {
   margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+}
+
+#userName {
+  color: rgb(222, 0, 0);
 }
